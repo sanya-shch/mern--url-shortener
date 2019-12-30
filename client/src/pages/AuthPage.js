@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {useHttp} from "../hooks/http.hook";
 import {useMessage} from "../hooks/message.hook";
+import {useAuth} from "../hooks/auth.hook";
 
 export const AuthPage = () => {
+    const auth = useAuth();
     const message = useMessage();
     const {loading, error, request, clearError} = useHttp();
     const [value, setValue] = useState({email: '', password: ''});
@@ -20,6 +22,15 @@ export const AuthPage = () => {
         try {
             const data = await request('/api/auth/register', 'POST', {...value});
             message(data.message);
+        } catch (e) {
+
+        }
+    };
+
+    const loginHandler = async () => {
+        try {
+            const data = await request('/api/auth/login', 'POST', {...value});
+            auth.login(data.token, data.userId);
         } catch (e) {
 
         }
@@ -44,7 +55,7 @@ export const AuthPage = () => {
                         </div>
                     </div>
                     <div className="card-action">
-                        <button className='btn yellow darken-4' style={ {marginRight: 10} } disabled={loading}>Login</button>
+                        <button className='btn yellow darken-4' style={ {marginRight: 10} } onClick={loginHandler} disabled={loading}>Login</button>
                         <button className='btn grey lighten-3 black-text' onClick={registerHandler} disabled={loading}>Registration</button>
                     </div>
                 </div>
