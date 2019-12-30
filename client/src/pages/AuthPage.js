@@ -45,11 +45,11 @@ export const AuthPage = () => {
                         <span className="card-title">Authorization</span>
                         <div>
                             <div className="input-field">
-                                <input onChange={changeHandler} id="email" type="email" name="email" className='white-text'/>
+                                <input value={value.email} onChange={changeHandler} id="email" type="email" name="email" className='white-text'/>
                                     <label htmlFor="email" className='white-text'>Email</label>
                             </div>
                             <div className="input-field">
-                                <input onChange={changeHandler} id="password" type="password" name="password" className='white-text'/>
+                                <input value={value.password} onChange={changeHandler} id="password" type="password" name="password" className='white-text'/>
                                     <label htmlFor="password" className='white-text'>Password</label>
                             </div>
                         </div>
